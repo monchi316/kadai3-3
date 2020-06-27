@@ -56,9 +56,14 @@
         removeBtn.textContent = '削除';
         // 削除ボタン
         removeBtn.addEventListener('click', () => {
-          removeTask();
+          removeTask(index);
           createTask();
         });
+        // ステータスボタン
+        statusBtn.addEventListener('click', () => {
+          statusNow(index);
+          createTask();
+        }); 
       });
     };
     createTask();
@@ -66,9 +71,16 @@
   }
   // 削除処理内容
   // 配列から該当オブジェクトの削除を行う
-  const removeTask = () => {
-    const removeTr = event.target.parentNode.parentNode;
-    const number = removeTr.firstChild.innerHTML;
-    tasks.splice(number, 1);
+  const removeTask = (index) => {
+    tasks.splice(index, 1);
+  }
+  // ステータスボタン処理内容
+  // 該当オブジェクトのstatusプロパティの値を変更する
+  const statusNow = (index) => {
+    if (tasks[index].status === '作業中') {
+      tasks[index].status = '完了';
+    } else {
+      tasks[index].status = '作業中';
+    }
   }
 }
