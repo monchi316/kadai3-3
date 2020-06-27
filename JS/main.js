@@ -59,6 +59,11 @@
           removeTask();
           createTask();
         });
+        // ステータスボタン
+        statusBtn.addEventListener('click', () => {
+          statusNow();
+          createTask();
+        }); 
       });
     };
     createTask();
@@ -70,5 +75,16 @@
     const removeTr = event.target.parentNode.parentNode;
     const number = removeTr.firstChild.innerHTML;
     tasks.splice(number, 1);
+  }
+  // ステータスボタン処理内容
+  // 該当オブジェクトのstatusプロパティの値を変更する
+  const statusNow = () => {
+    const statustr = event.target.parentNode.parentNode;
+    const number = statustr.firstChild.innerHTML;
+    if (tasks[number].status === '作業中') {
+      tasks[number].status = '完了';
+    } else {
+      tasks[number].status = '作業中';
+    }
   }
 }
